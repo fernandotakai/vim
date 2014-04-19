@@ -21,11 +21,8 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'SirVer/ultisnips'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'majutsushi/tagbar'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'mileszs/ack.vim'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'maxbrunsfeld/vim-yankstack'
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'rodjek/vim-puppet'
 Bundle 'tpope/vim-markdown'
 Bundle 'jimenezrick/vimerl'
@@ -33,8 +30,7 @@ Bundle 'sophacles/vim-bundle-mako'
 Bundle 'dogrover/vim-pentadactyl'
 
 " from vimscripts
-Bundle 'pthon.vim'
-Bundle 'jpythonfold.vim'
+Bundle 'python.vim'
 
 set vb
 colorscheme mustang
