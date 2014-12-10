@@ -28,6 +28,9 @@ Bundle 'tpope/vim-markdown'
 Bundle 'jimenezrick/vimerl'
 Bundle 'sophacles/vim-bundle-mako'
 Bundle 'dogrover/vim-pentadactyl'
+Bundle 'kovisoft/slimv'
+Bundle 'honza/vim-snippets'
+Bundle 'Valloric/YouCompleteMe'
 
 " from vimscripts
 Bundle 'python.vim'
@@ -228,6 +231,11 @@ map <silent> <c-]> :set noic<cr>g<c-]><silent>:set ic<cr>
 cmap w!! %!sudo tee > /dev/null %
 map <Leader>E :Explore<cr>
 
+map <c-h> <c-w>h
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+
 let g:Powerline_symbols = 'fancy'
 
 let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files', 'find %s -type f']
@@ -259,15 +267,16 @@ map <Leader>] :CtrlPBufTag<cr>
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,*.pyc,*.class,*/target/*
 
 " MiniBuff explorer settings
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1 
-
 let g:vim_markdown_folding_disabled=1
 
 let g:tagbar_autofocus = 1
 let g:tagbar_foldlevel = 0
+
+let g:UltiSnipsExpandTrigger="<c-b>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+nnoremap <leader>Y :let g:ycm_auto_trigger=!g:ycm_auto_trigger<CR>
 
 au BufRead,BufNewFile /usr/local/Cellar/nginx/0.7.65/conf/* set ft=nginx 
 au BufNewFile,BufRead *pentadactylrc*,*.penta set filetype=pentadactyl
@@ -276,5 +285,8 @@ au BufRead,BufNewFile *.fish set filetype=fish
 au BufRead,BufNewFile *.rc,*.rs set filetype=rust
 au BufRead,BufNewFile *.thrift set filetype=thrift
 au BufRead,BufNewFile *.spec set filetype=json
+
+augroup COMMIT_EDITMSG
+augroup end
 
 au FocusLost * :silent! wall
