@@ -10,32 +10,27 @@ Bundle 'gmarik/vundle'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
-Bundle 'sjl/gundo.vim'
 Bundle 'sjl/threesome.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'duff/vim-scratch'
-Bundle 'tpope/vim-repeat'
 Bundle 'kevinw/pyflakes-vim'
 Bundle 'kien/ctrlp.vim'
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'SirVer/ultisnips'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'majutsushi/tagbar'
-Bundle 'myusuf3/numbers.vim'
 Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'rodjek/vim-puppet'
 Bundle 'tpope/vim-markdown'
-Bundle 'jimenezrick/vimerl'
 Bundle 'sophacles/vim-bundle-mako'
 Bundle 'dogrover/vim-pentadactyl'
-Bundle 'kovisoft/slimv'
 Bundle 'honza/vim-snippets'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'rking/ag.vim'
 
 " from vimscripts
 Bundle 'python.vim'
 
-set vb
+" set vb t_vb=
 colorscheme mustang
 
 set number
@@ -53,12 +48,13 @@ set incsearch
 set noswapfile
 set scrolloff=5
 set ttyfast
+set lazyredraw
 
 set undofile
 
 set undodir=~/.vim/undodir
-set undolevels=1000 "maximum number of changes that can be undone
-set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+set undolevels=100 "maximum number of changes that can be undone
+set undoreload=100 "maximum number lines to save for undo on a buffer reload
 set laststatus=2
 
 if has('mouse')
@@ -99,8 +95,6 @@ set cot-=preview
 set ruler
 set nohls
 
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
 " Search
 set incsearch
 set ignorecase
@@ -124,11 +118,6 @@ inoremap <C-U> <C-G>u<C-U>
 nmap <c-p> <Plug>yankstack_substitute_newer_paste
 nmap <c-P> <Plug>yankstack_substitute_older_paste
 
-vmap j gj
-vmap k gk
-nmap j gj
-nmap k gk
-
 nmap <c-m> :nohlsearch<cr>
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
@@ -136,7 +125,7 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 map <Leader>b :MiniBufExplorer<cr>
 map <Leader>t :TagbarToggle<CR> 
 map <Leader>y :YRShow<cr>
-map <Leader>a :Ack 
+map <Leader>a :Ag
 map <leader>g :GundoToggle<cr>
 map <Leader><Tab> :Scratch<cr>
 nmap <Leader>c :close<cr>
@@ -236,7 +225,7 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 
-let g:Powerline_symbols = 'fancy'
+let g:pyflakes_use_quickfix = 0
 
 let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files', 'find %s -type f']
 
