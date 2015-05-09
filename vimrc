@@ -10,7 +10,6 @@ Bundle 'gmarik/vundle'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
-Bundle 'sjl/threesome.vim'
 Bundle 'sjl/gundo.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'duff/vim-scratch'
@@ -27,6 +26,7 @@ Bundle 'dogrover/vim-pentadactyl'
 Bundle 'honza/vim-snippets'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'rking/ag.vim'
+Bundle 'bling/vim-airline'
 
 " from vimscripts
 Bundle 'python.vim'
@@ -278,5 +278,9 @@ au BufRead,BufNewFile *.spec set filetype=json
 
 augroup COMMIT_EDITMSG
 augroup end
+
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'powerlineish'
+let g:airline_extensions = ['branch', 'ctrlp']
 
 au FocusLost * :silent! wall
