@@ -1,19 +1,26 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-set rtp+=$GOROOT/misc/vim
-call vundle#rc()
+let s:nvim_editor_root=expand("~/.config/nvim")
+
+if has('nvim')
+    set rtp+=~/.config/nvim/bundle/Vundle.vim
+    call vundle#begin(s:nvim_editor_root . '/bundle')
+else
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+endif
 
  " from github
-Bundle 'gmarik/vundle'
-Bundle 'kchmck/vim-coffee-script'
+Bundle 'VundleVim/Vundle.vim'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'vim-syntastic/syntastic'
+Bundle 'hdima/python-syntax'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'sjl/gundo.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'duff/vim-scratch'
-Bundle 'kevinw/pyflakes-vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'SirVer/ultisnips'
 Bundle 'fholgado/minibufexpl.vim'
@@ -27,15 +34,25 @@ Bundle 'honza/vim-snippets'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'rking/ag.vim'
 Bundle 'bling/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
+
+Bundle 'pangloss/vim-javascript'
+Bundle 'mxw/vim-jsx'
+
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'mtscout6/vim-cjsx'
+
+call vundle#end()
+
+filetype plugin indent on
 
 " from vimscripts
-Bundle 'python.vim'
 
 " set vb t_vb=
 colorscheme mustang
 
 set number
-set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline:h12
+set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline:h9
 set relativenumber
 
 set hidden
@@ -53,7 +70,12 @@ set lazyredraw
 
 set undofile
 
-set undodir=~/.vim/undodir
+if has('nvim')
+    set undodir=s:nvim_editor_root . '/undodir'
+else
+    set undodir=~/.vim/undodir
+endif
+
 set undolevels=100 "maximum number of changes that can be undone
 set undoreload=100 "maximum number lines to save for undo on a buffer reload
 set laststatus=2
@@ -69,8 +91,6 @@ set backupskip=/tmp/*,/private/tmp/*"
 
 au VimResized * :wincmd =
 
-filetype plugin indent on
-
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -80,6 +100,8 @@ set clipboard=unnamed
 
 autocmd FileType text setlocal textwidth=79
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+autocmd FileType coffee setlocal shiftwidth=2 tabstop=2
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
@@ -283,6 +305,30 @@ augroup end
 
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'powerlineish'
-let g:airline_extensions = ['branch', 'ctrlp']
+let g:airline_extensions = ['branch', 'ctrlp', 'syntastic']
+let g:python_slow_sync = 1
+
+let g:airline#extensions#syntastic#enabled = 1
+
+let python_highlight_all = 1
+let python_print_as_function = 1
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:ycm_python_binary_path = 'python'
+let g:syntastic_python_checkers = ['flake8', 'python']
+
+let g:syntastic_python_python_exec = '/home/ftakai/bin/python-vim'
+let g:syntastic_python_flake8_exec = '/home/ftakai/bin/python-vim'
+let g:syntastic_python_flake8_args = ['-m', 'flake8']
+
+if getcwd() =~# '\/olark\/'
+    let python_version_2 = 1
+endif
+
+map q: <Nop>
 
 au FocusLost * :silent! wall
